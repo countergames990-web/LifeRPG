@@ -23,6 +23,12 @@ flutter config --enable-web
 echo "📚 Getting dependencies..."
 flutter pub get
 
+# Install function dependencies
+echo "📦 Installing Netlify function dependencies..."
+cd netlify/functions
+npm install
+cd ../..
+
 # Build for web
 echo "🏗️ Building web app..."
 flutter build web --release --web-renderer html
