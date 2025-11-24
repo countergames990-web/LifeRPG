@@ -9,7 +9,7 @@
     echo "Installing function dependencies..."
     cd netlify/functions && npm install && cd ../..
     echo "Building Flutter web app..."
-    flutter build web --release --web-renderer html
+    flutter build web --release
     echo "Build complete!"
     ls -la build/web || echo "Build directory missing!"
   """
