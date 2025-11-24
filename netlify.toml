@@ -1,5 +1,18 @@
 [build]
-  command = "chmod +x build.sh && ./build.sh"
+  command = """
+    echo "Installing Flutter..."
+    git clone https://github.com/flutter/flutter.git -b stable --depth 1 || true
+    export PATH="$PATH:$PWD/flutter/bin"
+    flutter doctor -v
+    flutter config --enable-web
+    flutter pub get
+    echo "Installing function dependencies..."
+    cd netlify/functions && npm install && cd ../..
+    echo "Building Flutter web app..."
+    flutter build web --release --web-renderer html
+    echo "Build complete!"
+    ls -la build/web || echo "Build directory missing!"
+  """
   publish = "build/web"
 
 [build.environment]
